@@ -1,0 +1,7 @@
+{
+  "name": "jev-lens-harness",
+  "private": true,
+  "type": "module",
+  "description": "Scripts to load, verify, record and evaluate Jev Lens against a running Chrome over CDP",
+  "dependencies": { "playwright-core": "^1.58.0" }
+}

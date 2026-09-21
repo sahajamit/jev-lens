@@ -1,0 +1,3 @@
+artifacts/
+.playwright-cli/
+harness/node_modules/

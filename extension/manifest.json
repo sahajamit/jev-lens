@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "name": "Jev Lens",
+  "version": "0.1.0",
+  "description": "Badges X and LinkedIn posts READ / MAYBE / SKIP against your own interest profile, decided by Jev (TypeSafe) while you scroll.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://api.typesafe.ai/*"
+  ],
+  "background": {
+    "service_worker": "worker.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Jev Lens",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://x.com/*",
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "adapters/x.js",
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.linkedin.com/*"
+      ],
+      "js": [
+        "adapters/linkedin.js",
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

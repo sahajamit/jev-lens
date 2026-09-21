@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Jev Lens</title>
+<style>
+  :root { color-scheme: dark; }
+  body { width: 420px; margin: 0; background: #0e1113; color: #e4e8eb; font: 13px/1.45 -apple-system, "IBM Plex Sans", Helvetica, Arial, sans-serif; }
+  .wrap { padding: 14px 16px 16px; }
+  h1 { font-size: 15px; margin: 0 0 2px; letter-spacing: .02em; }
+  .sub { color: #8b8d97; font-size: 12px; margin: 0 0 12px; }
+  label { display: block; font: 600 10px ui-monospace, Menlo, monospace; letter-spacing: .1em; text-transform: uppercase; color: #8b8d97; margin: 12px 0 4px; }
+  input[type=text], input[type=password], textarea { width: 100%; box-sizing: border-box; background: #0a0d0f; color: #e4e8eb; border: 1px solid #2a333a; border-radius: 4px; padding: 7px 9px; font: 12px/1.4 -apple-system, sans-serif; }
+  textarea { min-height: 84px; resize: vertical; }
+  .row { display: flex; gap: 8px; align-items: center; }
+  .row > * { flex: 1; }
+  .btn { background: #e6b34f; color: #1a1405; border: 0; border-radius: 4px; padding: 7px 12px; font: 600 12px ui-monospace, Menlo, monospace; cursor: pointer; }
+  .btn.ghost { background: transparent; color: #e4e8eb; border: 1px solid #2a333a; }
+  .sl { display: grid; grid-template-columns: 1fr 64px 40px; gap: 8px; align-items: center; margin: 4px 0; font-size: 12px; }
+  .sl input[type=range] { width: 100%; }
+  .sl .v { font: 12px ui-monospace, Menlo, monospace; color: #e6b34f; text-align: right; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 8px; }
+  .stat { background: #161b1f; border: 1px solid #2a333a; border-radius: 4px; padding: 6px 8px; }
+  .stat .k { font: 10px ui-monospace, Menlo, monospace; color: #8b8d97; letter-spacing: .08em; text-transform: uppercase; }
+  .stat .n { font: 600 15px ui-monospace, Menlo, monospace; }
+  .msg { font: 12px ui-monospace, Menlo, monospace; color: #4fd1b8; min-height: 16px; margin-top: 6px; }
+  .msg.bad { color: #e2705f; }
+  .toggles { display: flex; gap: 14px; font-size: 12px; margin-top: 6px; }
+  .toggles label { display: inline; text-transform: none; letter-spacing: 0; font: 12px -apple-system, sans-serif; color: #e4e8eb; margin: 0; }
+  footer { margin-top: 14px; display: flex; gap: 8px; justify-content: space-between; align-items: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Jev Lens</h1>
+  <p class="sub">READ / MAYBE / SKIP badges on X and LinkedIn, decided by Jev against your interest profile. Not affiliated with TypeSafe AI.</p>
+
+  <label for="apiKey">TypeSafe API key</label>
+  <div class="row"><input id="apiKey" type="password" placeholder="apikey…" autocomplete="off"><button class="btn ghost" id="test" style="flex:0 0 auto">Test</button></div>
+  <div class="msg" id="keyMsg"></div>
+
+  <label for="persona">Who you are (one line, used in every judgment)</label>
+  <input id="persona" type="text" placeholder="a hands-on software engineer who builds and tests AI agents">
+
+  <label for="profile">Posts I want to read (the criteria Jev judges against)</label>
+  <textarea id="profile"></textarea>
+  <label for="antiProfile">Posts I want to skip</label>
+  <textarea id="antiProfile"></textarea>
+
+  <label>Thresholds</label>
+  <div class="sl"><span>READ needs fit ≥</span><input type="range" id="readFit" min="0.3" max="0.95" step="0.05"><span class="v" id="readFitV"></span></div>
+  <div class="sl"><span>READ needs depth ≥</span><input type="range" id="readDepth" min="0" max="3" step="0.25"><span class="v" id="readDepthV"></span></div>
+  <div class="sl"><span>SKIP when fit &lt;</span><input type="range" id="skipFit" min="0.05" max="0.6" step="0.05"><span class="v" id="skipFitV"></span></div>
+  <div class="sl"><span>SKIP when AI-ness &lt;</span><input type="range" id="skipAi" min="0.05" max="0.8" step="0.05"><span class="v" id="skipAiV"></span></div>
+
+  <label>Behaviour</label>
+  <div class="toggles">
+    <label><input type="checkbox" id="enX"> X.com</label>
+    <label><input type="checkbox" id="enLi"> LinkedIn</label>
+    <label><input type="radio" name="mode" id="modeDim" value="dim"> dim skips</label>
+    <label><input type="radio" name="mode" id="modeCollapse" value="collapse"> collapse skips</label>
+  </div>
+
+  <label>This session</label>
+  <div class="stats">
+    <div class="stat"><div class="k">judged</div><div class="n" id="sPosts">0</div></div>
+    <div class="stat"><div class="k">read</div><div class="n" id="sRead">0</div></div>
+    <div class="stat"><div class="k">requests</div><div class="n" id="sReq">0</div></div>
+    <div class="stat"><div class="k">cost</div><div class="n" id="sCost">$0</div></div>
+  </div>
+
+  <footer>
+    <span class="msg" id="saveMsg"></span>
+    <span><button class="btn ghost" id="restore">Restore defaults</button> <button class="btn ghost" id="export">Export feedback</button> <button class="btn" id="save">Save</button></span>
+  </footer>
+</div>
+<script src="popup.js"></script>
+</body>
+</html>

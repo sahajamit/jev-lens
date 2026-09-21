@@ -1,0 +1,37 @@
+/* Jev Lens: verdict borders, badges, dimming. Kept high-specificity-free so site CSS wins on layout. */
+[data-jev-verdict] { transition: opacity .2s ease, box-shadow .2s ease; }
+.jev-read { box-shadow: inset 3px 0 0 0 #00c48c, 0 0 0 1px rgba(0, 196, 140, .45) !important; border-radius: 6px; }
+.jev-maybe { box-shadow: inset 3px 0 0 0 #ffb020, 0 0 0 1px rgba(255, 176, 32, .35) !important; border-radius: 6px; }
+.jev-skip { opacity: .38; }
+.jev-skip:hover { opacity: .9; }
+html.jev-collapse .jev-skip { max-height: 44px; overflow: hidden; opacity: .55; }
+html.jev-collapse .jev-skip:hover { max-height: none; opacity: 1; }
+
+.jev-lens-badge {
+  display: flex; align-items: center; justify-content: flex-end; gap: 8px;
+  padding: 6px 12px 0; width: 100%; box-sizing: border-box;
+  font: 500 11px/1.2 ui-monospace, "SF Mono", Menlo, monospace; pointer-events: auto;
+}
+.jev-pill { padding: 3px 8px; border-radius: 4px; letter-spacing: .06em; font-weight: 700; white-space: nowrap; }
+.jev-pill.jev-read { background: rgba(0, 196, 140, .18); color: #00c48c; border: 1px solid #00c48c; box-shadow: none !important; opacity: 1; }
+.jev-pill.jev-maybe { background: rgba(255, 176, 32, .16); color: #ffb020; border: 1px solid #ffb020; box-shadow: none !important; opacity: 1; }
+.jev-pill.jev-skip { background: rgba(120, 128, 140, .18); color: #9aa3ab; border: 1px solid #5d666d; opacity: 1; }
+.jev-pill.jev-pending { background: rgba(41, 98, 255, .14); color: #7aa0ff; border: 1px dashed #4a6fd8; }
+.jev-pill.jev-error { background: rgba(255, 71, 87, .14); color: #ff6b7a; border: 1px solid #ff4757; }
+.jev-why { color: #8b8d97; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 260px; }
+.jev-fb { display: none; gap: 4px; }
+.jev-lens-badge:hover .jev-fb { display: inline-flex; }
+.jev-fbtn { font: 600 10px ui-monospace, Menlo, monospace; padding: 2px 6px; border-radius: 3px; border: 1px solid #5d666d; background: #1d2429; color: #e4e8eb; cursor: pointer; }
+.jev-fbtn:disabled { opacity: .6; cursor: default; }
+.jev-skip .jev-lens-badge { opacity: 1; }
+
+/* X: the tweet <article> is a flex row (avatar | content), so the badge cannot be a flow child. Float it top-right and
+   make room above the author line. */
+html.jev-site-x article[data-jev-verdict] { position: relative; padding-top: 34px !important; }
+html.jev-site-x .jev-lens-badge { position: absolute; top: 8px; right: 14px; width: auto; padding: 0; z-index: 5; }
+
+#jev-lens-counter {
+  position: fixed; left: 12px; bottom: 12px; z-index: 2147483000;
+  background: #0e1113; color: #e4e8eb; border: 1px solid #2a333a; border-radius: 6px;
+  padding: 6px 10px; font: 500 11px ui-monospace, Menlo, monospace; opacity: .85; pointer-events: none;
+}
