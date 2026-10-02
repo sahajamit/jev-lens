@@ -6,6 +6,11 @@
 
 No scripted rules, no keyword lists, no cloud account of ours. Your API key, your profile, your browser.
 
+> [!TIP]
+> **Want the deep dive on Jev?** If you want to understand the model behind this extension, I have written a companion blog post on my portfolio site: how Jev and RLCD work, why System 1 models fit automation better than chatbots, and what I learned building this.
+>
+> **[Jev and RLCD: The Model That Never Speaks, and Why Testers Should Care](https://amitrawat.dev/blog/jev-rlcd-system-one-models-for-testers/)**
+
 <p align="center"><img src="docs/demo-linkedin.gif" alt="Jev Lens on a LinkedIn feed" width="880"></p>
 <p align="center"><em>LinkedIn, real time. Two READs (an NVIDIA harness paper, a Jev verifier build log) between dimmed promoted posts and job news.</em></p>
 
